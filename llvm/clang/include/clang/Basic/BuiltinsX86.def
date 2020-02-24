@@ -1872,6 +1872,12 @@ TARGET_BUILTIN(__builtin_ia32_ptwrite32, "vUi", "n", "ptwrite")
 // INVPCID
 TARGET_BUILTIN(__builtin_ia32_invpcid, "vUiv*", "nc", "invpcid")
 
+// AMBIT
+//BUILTIN(__builtin_ia32_bbnot, "vv*v*UNi", "nh")
+BUILTIN(__builtin_ia32_bbor, "vv*v*UNi", "nh")
+BUILTIN(__builtin_ia32_bband, "vv*v*UNi", "nh")
+BUILTIN(__builtin_ia32_bbxor, "vv*v*UNi", "nh")
+
 // MSVC
 TARGET_HEADER_BUILTIN(_BitScanForward, "UcUNi*UNi", "nh", "intrin.h", ALL_MS_LANGUAGES, "")
 TARGET_HEADER_BUILTIN(_BitScanReverse, "UcUNi*UNi", "nh", "intrin.h", ALL_MS_LANGUAGES, "")

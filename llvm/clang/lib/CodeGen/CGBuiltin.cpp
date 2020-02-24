@@ -11333,6 +11333,30 @@ Value *CodeGenFunction::EmitX86BuiltinExpr(unsigned BuiltinID,
   case X86::BI__builtin_ia32_cmpordsd:
     return getCmpIntrinsicCall(Intrinsic::x86_sse2_cmp_sd, 7);
 
+  //////////////////////////////////////////////////
+  // Ambit
+  //////////////////////////////////////////////////
+  
+  //case X86::BI__builtin_ia32_bbnot: {
+  //  Function *F = CGM.getIntrinsic(Intrinsic::bbnot, Ops[2]->getType());
+  //  return Builder.CreateCall(F, {Ops[0], Ops[1], Ops[2]});
+  //}
+  
+  case X86::BI__builtin_ia32_bbor: {
+    Function *F = CGM.getIntrinsic(Intrinsic::bbor, Ops[2]->getType());
+    return Builder.CreateCall(F, {Ops[0], Ops[1], Ops[2]});
+  }
+  
+  case X86::BI__builtin_ia32_bband: {
+    Function *F = CGM.getIntrinsic(Intrinsic::bband, Ops[2]->getType());
+    return Builder.CreateCall(F, {Ops[0], Ops[1], Ops[2]});
+  }
+  
+  case X86::BI__builtin_ia32_bbxor: {
+    Function *F = CGM.getIntrinsic(Intrinsic::bbxor, Ops[2]->getType());
+    return Builder.CreateCall(F, {Ops[0], Ops[1], Ops[2]});
+  }
+
   case X86::BI__emul:
   case X86::BI__emulu: {
     llvm::Type *Int64Ty = llvm::IntegerType::get(getLLVMContext(), 64);

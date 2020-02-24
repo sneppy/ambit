@@ -1366,3 +1366,40 @@ let Predicates = [HasADX], Defs = [EFLAGS], Uses = [EFLAGS],
                     "adox{q}\t{$src2, $dst|$dst, $src2}", []>, T8XS;
   } // mayLoad, SchedRW
 }
+
+
+//===----------------------------------------------------------------------===//
+// Ambit instructions
+//
+
+// ! Does not work
+//class AmbitBinOp<bits<8> opcode, string mnemonic, SDPatternOperator opnode> : RIi32<opcode, MRMDestReg,
+//				(outs), (ins GR64:$src1, GR64:$src2, i32imm:$len),
+//				!strconcat(mnemonic, "\t{$len, $src2, $src1|$src1, $src2, $len}"),
+//				[(opnode GR64:$src1, GR64:$src2, imm32_su:$len)]>;
+
+//def BBNOT	: AmbitBinOp<0x80, "bbnot", int_bbnot>;
+//def BBOR	: AmbitBinOp<0x81, "bbor", int_bbor>;
+//def BBAND	: AmbitBinOp<0x82, "bband", int_bband>;
+//def BBXOR	: AmbitBinOp<0x83, "bbxor", int_bbxor>;
+
+// * bbnot must use a different format
+//def BBNOT : RIi32<0x79, MRMDestReg,
+//				(outs), (ins GR64:$src1, GR64:$src2, i32imm:$len),
+//				"bbnot\t{$len, $src2, $src1|$src1, $src2, $len}",
+//				[(int_bbnot GR64:$src1, GR64:$src2, imm32_su:$len)]>;
+
+def BBOR : RIi32<0x80, MRMDestReg,
+				(outs), (ins GR64:$src1, GR64:$src2, i32imm:$len),
+				"bbor\t{$len, $src2, $src1|$src1, $src2, $len}",
+				[(int_bbor GR64:$src1, GR64:$src2, imm32_su:$len)]>;
+
+def BBAND : RIi32<0xF0, MRMDestReg,
+				(outs), (ins GR64:$src1, GR64:$src2, i32imm:$len),
+				"bband\t{$len, $src2, $src1|$src1, $src2, $len}",
+				[(int_bband GR64:$src1, GR64:$src2, imm32_su:$len)]>;
+
+def BBXOR : RIi32<0x82, MRMDestReg,
+				(outs), (ins GR64:$src1, GR64:$src2, i32imm:$len),
+				"bbxor\t{$len, $src2, $src1|$src1, $src2, $len}",
+				[(int_bbxor GR64:$src1, GR64:$src2, imm32_su:$len)]>;

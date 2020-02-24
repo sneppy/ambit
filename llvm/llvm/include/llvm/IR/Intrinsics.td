@@ -1156,3 +1156,12 @@ include "llvm/IR/IntrinsicsBPF.td"
 include "llvm/IR/IntrinsicsSystemZ.td"
 include "llvm/IR/IntrinsicsWebAssembly.td"
 include "llvm/IR/IntrinsicsRISCV.td"
+
+//===----------------------------------------------------------------------===//
+// Ambit intrinsics
+//===----------------------------------------------------------------------===//
+
+//def int_bbnot	: Intrinsic<[], [llvm_ptr_ty, llvm_ptr_ty, llvm_anyint_ty]>;
+def int_bbor	: Intrinsic<[], [llvm_ptr_ty, llvm_ptr_ty, llvm_anyint_ty]>;
+def int_bband	: Intrinsic<[], [llvm_ptr_ty, llvm_ptr_ty, llvm_anyint_ty]>;
+def int_bbxor	: Intrinsic<[], [llvm_ptr_ty, llvm_ptr_ty, llvm_anyint_ty]>;
